@@ -1,4 +1,4 @@
-package com.mhaas.acmecontact.domain
+package com.mhaas.acmecontact.domain.client.openweathermap
 
 data class ForecastData (
     val temp: Double?,

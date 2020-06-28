@@ -1,23 +1,21 @@
-package com.mhaas.acmecontact.domain
+package com.mhaas.acmecontact.domain.client.openweathermap
 
 import java.time.OffsetDateTime
 
-data class OpenWeatherMapResponse (
-    val cod: String?,
-    val message: Int?,
-    val cnt: Int?,
-    val list: List<ForecastForSpecificTime?>?,
-    val city: City?,
+data class ForecastForSpecificTime (
+    val dt: OffsetDateTime?,
+    val main: ForecastData?,
     val weather: List<WeatherCondition?>?,
     val clouds: Clouds?,
     val wind: Wind?,
     val rain: Rain?,
     val snow: Snow?,
-    val dtTxt: OffsetDateTime?
+    val sys: Sys?,
+    val dtTxt: String?
 )
 
 data class Clouds(
-    val all: String?
+    val all: Int?
 )
 
 data class Wind(
@@ -31,4 +29,8 @@ data class Rain(
 
 data class Snow(
     val threeH: String?
+)
+
+data class Sys(
+    val pod: String?
 )

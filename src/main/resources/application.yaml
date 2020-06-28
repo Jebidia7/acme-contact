@@ -1,3 +1,6 @@
 micronaut:
   application:
     name: acme-contact
+
+jackson:
+  property-naming-strategy: SNAKE_CASE

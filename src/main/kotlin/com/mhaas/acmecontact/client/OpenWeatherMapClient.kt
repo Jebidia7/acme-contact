@@ -1,16 +1,11 @@
 package com.mhaas.acmecontact.client
 
-import com.fasterxml.jackson.databind.DeserializationFeature
-import com.mhaas.acmecontact.domain.OpenWeatherMapResponse
+import com.mhaas.acmecontact.domain.client.openweathermap.OpenWeatherMapResponse
 import io.micronaut.http.annotation.Get
 import io.micronaut.http.annotation.QueryValue
 import io.micronaut.http.client.annotation.Client
-import io.micronaut.jackson.annotation.JacksonFeatures
 import java.util.concurrent.CompletableFuture
 
-@JacksonFeatures(
-    disabledDeserializationFeatures = [DeserializationFeature.FAIL_ON_MISSING_CREATOR_PROPERTIES]
-)
 @Client("https://api.openweathermap.org/data/2.5")
 interface OpenWeatherMapClient {
 
