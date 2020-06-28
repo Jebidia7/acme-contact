@@ -3,9 +3,9 @@ package com.mhaas.acmecontact.domain.client.openweathermap
 import java.time.OffsetDateTime
 
 data class ForecastForSpecificTime (
-    val dt: OffsetDateTime?,
-    val main: ForecastData?,
-    val weather: List<WeatherCondition?>?,
+    val dt: OffsetDateTime,
+    val main: ForecastData,
+    val weather: List<WeatherCondition>,
     val clouds: Clouds?,
     val wind: Wind?,
     val rain: Rain?,

@@ -5,11 +5,11 @@ import com.mhaas.acmecontact.service.OutreachRecommendationService
 import io.micronaut.http.annotation.Controller
 import io.micronaut.http.annotation.Get
 
-@Controller("/v1/weather")
-class WeatherController(private val outreachRecommendationService: OutreachRecommendationService) {
+@Controller("/acme-contact/v1/recommendations")
+class RecommendationsController(private val outreachRecommendationService: OutreachRecommendationService) {
 
     @Get
-    suspend fun weather(): List<OutreachRecommendation> {
+    suspend fun recommendations(): List<OutreachRecommendation> {
         val response = outreachRecommendationService.getOutreachRecommendation()
         return response
     }
