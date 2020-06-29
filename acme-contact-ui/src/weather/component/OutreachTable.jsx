@@ -9,11 +9,11 @@ class ForecastTable extends React.PureComponent {
 
     render() {
         return(
-            <div class="container">
-                <div class="row">
+            <div className="container">
+                <div className="row">
                     {this.props.recommendations.map((recommendation) =>
-                        <div class="col">
-                            <OutreachDay recommendation={recommendation} />
+                        <div className="col">
+                            <OutreachDay key={recommendation.day_of_week} recommendation={recommendation} />
                         </div>
                     )}
                 </div>

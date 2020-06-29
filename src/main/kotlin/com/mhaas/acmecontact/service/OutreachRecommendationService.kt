@@ -1,30 +1,28 @@
 package com.mhaas.acmecontact.service
 
 import com.mhaas.acmecontact.client.OpenWeatherMapClient
-import com.mhaas.acmecontact.domain.response.OutreachRecommendation
-import com.mhaas.acmecontact.domain.response.Strategy
-import java.time.DayOfWeek
-import java.time.Duration
-import java.time.OffsetDateTime
+import com.mhaas.acmecontact.domain.response.OutreachRecommendationSchedule
+import java.time.ZoneId
+import java.time.ZoneOffset
 import javax.inject.Singleton
 
 @Singleton
-class OutreachRecommendationService(private val openWeatherMapClient: OpenWeatherMapClient) {
+class OutreachRecommendationService(
+    private val openWeatherMapClient: OpenWeatherMapClient,
+    private val outreachMethodTimeService: OutreachMethodTimeService
+) {
 
-    suspend fun getOutreachRecommendation(): List<OutreachRecommendation> {
+    suspend fun getOutreachRecommendation(): List<OutreachRecommendationSchedule> {
 
-        val forecastData = openWeatherMapClient.getForecast().join()
-
-        val forecastByDayOfWeek = forecastData.list
-            .groupBy { it.dt.dayOfWeek }
-
-        val now = OffsetDateTime.now()
-
-        return listOf(
-            OutreachRecommendation(DayOfWeek.MONDAY, listOf(Strategy(now))),
-            OutreachRecommendation(DayOfWeek.TUESDAY, listOf(Strategy(now))),
-            OutreachRecommendation(DayOfWeek.WEDNESDAY, listOf(Strategy(now))),
-            OutreachRecommendation(DayOfWeek.THURSDAY, listOf(Strategy(now))),
-            OutreachRecommendation(DayOfWeek.FRIDAY, listOf(Strategy(now))))
+        return openWeatherMapClient.getForecast().join().list
+            .sortedBy {
+                it.dt
+            }
+            .groupBy {
+                it.dt.atZoneSameInstant(ZoneId.of("America/Chicago")).dayOfWeek
+            }
+            .map {
+                OutreachRecommendationSchedule(it.key, outreachMethodTimeService.buildOutreachMethods(it.value))
+            }
     }
 }

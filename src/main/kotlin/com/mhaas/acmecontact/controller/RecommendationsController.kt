@@ -1,6 +1,6 @@
 package com.mhaas.acmecontact.controller
 
-import com.mhaas.acmecontact.domain.response.OutreachRecommendation
+import com.mhaas.acmecontact.domain.response.OutreachRecommendationSchedule
 import com.mhaas.acmecontact.service.OutreachRecommendationService
 import io.micronaut.http.annotation.Controller
 import io.micronaut.http.annotation.Get
@@ -9,7 +9,7 @@ import io.micronaut.http.annotation.Get
 class RecommendationsController(private val outreachRecommendationService: OutreachRecommendationService) {
 
     @Get
-    suspend fun recommendations(): List<OutreachRecommendation> {
+    suspend fun recommendations(): List<OutreachRecommendationSchedule> {
         val response = outreachRecommendationService.getOutreachRecommendation()
         return response
     }

@@ -1,4 +1,5 @@
 import React from 'react';
+import OutreachTimeslot from './OutreachTimeslot';
 
 class OutreachDay extends React.PureComponent {
 
@@ -8,10 +9,17 @@ class OutreachDay extends React.PureComponent {
 
     render() {
 
+        const dayOfWeek = this.props.recommendation.day_of_week;
+        const methodTimeslots = this.props.recommendation.outreach_method_times
+
         return(
             <div className="outreach-day">
-                <p>{this.props.recommendation.day}</p>
-                <p>{this.props.recommendation.method}</p>
+                <p>{dayOfWeek}</p>
+                <ul>
+                    {methodTimeslots.map((methodTime) =>
+                        <OutreachTimeslot methodTime={methodTime} />
+                    )}
+                </ul>
             </div>
 
 
