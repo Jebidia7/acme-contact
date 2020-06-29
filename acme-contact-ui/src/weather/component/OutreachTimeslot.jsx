@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 
 class OutreachTimeslot extends React.PureComponent {
 
@@ -7,9 +8,12 @@ class OutreachTimeslot extends React.PureComponent {
     }
 
     render() {
+        const startTime = moment(this.props.methodTime.start_time * 1000).format("LT")
+        const methods = this.props.methodTime.methods.join(", ")
         return(
             <li>
-                <p>{this.props.methodTime.start_time}</p>
+                <p>{startTime}</p>
+                <p>{methods}</p>
             </li>
         );
     }

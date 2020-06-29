@@ -11,7 +11,7 @@ class ForecastTable extends React.PureComponent {
         return(
             <div className="container">
                 <div className="row">
-                    {this.props.recommendations.map((recommendation) =>
+                    {this.props.recommendations.splice(0,5).map((recommendation) =>
                         <div className="col">
                             <OutreachDay key={recommendation.day_of_week} recommendation={recommendation} />
                         </div>

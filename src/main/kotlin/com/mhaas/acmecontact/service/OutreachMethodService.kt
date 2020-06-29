@@ -7,7 +7,7 @@ import javax.inject.Singleton
 @Singleton
 class OutreachMethodService {
 
-    private val clear = "clear"
+    private val overcast = "overcast"
     private val rain = "rain"
 
     fun determineOutreach(forecast: ForecastForSpecificTime): Set<OutreachMethod> {
@@ -17,13 +17,13 @@ class OutreachMethodService {
         val weatherDesc = forecast.weather.first().description
         val temp = forecast.main.temp
 
-        if (weatherDesc.equals(clear, true)) {
+        if (temp.compareTo(75) > 0 && !weatherDesc.contains(overcast, true)) {
             outreachMethods.add(OutreachMethod.SMS)
         }
         if (temp.compareTo(55) >= 0 && temp.compareTo(75) <= 0) {
             outreachMethods.add(OutreachMethod.EMAIL)
         }
-        if (temp.compareTo(55) < 0 || weatherDesc.equals(rain, true)) {
+        if (temp.compareTo(55) < 0 || weatherDesc.contains(rain, true)) {
             outreachMethods.add(OutreachMethod.PHONE)
         }
         if (outreachMethods.isEmpty()) {

@@ -15,7 +15,7 @@ class OutreachDay extends React.PureComponent {
         return(
             <div className="outreach-day">
                 <p>{dayOfWeek}</p>
-                <ul>
+                <ul className="outreach-day-list">
                     {methodTimeslots.map((methodTime) =>
                         <OutreachTimeslot methodTime={methodTime} />
                     )}
